@@ -46,23 +46,6 @@ for (sentiment, tweet) in data:
 	tweet_filtered = [clean_word(word) for word in tweet.split() if ((len(word) >= 3) and (not '@' in word))]
 	tweets.append((tweet_filtered, sentiment))
 
-print (tweets[:10])
-
-"""
-tweets = [
-	(['love', 'this', 'car'], 'positive'),
-	(['this', 'view', 'amazing'], 'positive'),
-	(['feel', 'great', 'this', 'morning'], 'positive'),
-	(['excited', 'about', 'the', 'concert'], 'positive'),
-	(['best', 'friend'], 'positive'),
-	(['not', 'like', 'this', 'car'], 'negative'),
-	(['this', 'view', 'horrible'], 'negative'),
-	(['feel', 'tired', 'this', 'morning'], 'negative'),
-	(['not', 'looking', 'forward', 'the', 'concert'], 'negative'),
-	(['enemy'], 'negative')]
-
-"""
-
 word_features = get_word_features(get_words_in_tweets(tweets))
 
 training_set = nltk.classify.apply_features(extract_features, tweets)
@@ -74,14 +57,3 @@ pickle.dump(classifier, f)
 f.close()
 
 print classifier.show_most_informative_features(32)
-
-#tweet = 'Your song is annoying'
-#tweet = tweet.lower()
-#print classifier.classify(extract_features(tweet.split()))
-
-#print label_probdist.prob('positive')
-#print label_probdist.prob('negative')
-
-#print(training_set)
-#print(word_features)
-#print(tweets)
