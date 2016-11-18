@@ -3,6 +3,7 @@ from tweepy import OAuthHandler
 from tweepy import Stream
 from tweepy.streaming import StreamListener
 import json
+import predict
  
 consumer_key = 'N3SXBClTt9tFAk98dkN0Ig6WW'
 consumer_secret = 'SInQ4RpBMiVjhoK3CJP3YgUmMLn90GoMtEAdwl1RuEcLbJ7ELK'
@@ -17,7 +18,9 @@ api = tweepy.API(auth)
 class MyListener(StreamListener):
 	def on_data(self, data):
 		d = json.loads(data)
-		print(d["text"])
+		tweet_text = d["text"]
+		print(tweet_text)
+		print(predict.classifier.classify(predict.extract_features(tweet_text.split())))
 		return True
 
 	def on_error(self, status):
