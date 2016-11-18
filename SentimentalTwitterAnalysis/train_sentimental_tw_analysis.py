@@ -28,15 +28,17 @@ def clean_word(word):
 
 data = []
 
-for line in sys.stdin:
-	line = re.split('","', line)
-	line[0] = line[0][1:]
-	line[1] = line[1][:-2]
-	if line[0] == '0':
-		line[0] = "negative"
-	else:
-		line[0] = "positive"
-	data.append((line[0], line[1]))
+with open('cleaned_training_data.csv', 'r') as cleaned_data_file:
+	for line in cleaned_data_file:
+		line = re.split('","', line)
+		line[0] = line[0][1:]
+		line[1] = line[1][:-2]
+		if line[0] == '0':
+			line[0] = "negative"
+		else:
+			line[0] = "positive"
+		data.append((line[0], line[1]))
+	cleaned_data_file.close()
 
 #print(data[:10])
 
@@ -47,11 +49,13 @@ for (sentiment, tweet) in data:
 	tweets.append((tweet_filtered, sentiment))
 
 word_features = get_word_features(get_words_in_tweets(tweets))
+f = open('word_features.pickle', 'wb')
+pickle.dump(word_features, f)
+f.close()
 
 training_set = nltk.classify.apply_features(extract_features, tweets)
 
 classifier = nltk.NaiveBayesClassifier.train(training_set)
-
 f = open('naive_bayes_classifier.pickle', 'wb')
 pickle.dump(classifier, f)
 f.close()
