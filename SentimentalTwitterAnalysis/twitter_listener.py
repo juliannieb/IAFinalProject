@@ -4,6 +4,8 @@ from tweepy import Stream
 from tweepy.streaming import StreamListener
 import json
 import predict
+import matplotlib.pyplot as plt
+import numpy as np
  
 consumer_key = 'N3SXBClTt9tFAk98dkN0Ig6WW'
 consumer_secret = 'SInQ4RpBMiVjhoK3CJP3YgUmMLn90GoMtEAdwl1RuEcLbJ7ELK'
@@ -20,12 +22,40 @@ class MyListener(StreamListener):
 		d = json.loads(data)
 		tweet_text = d["text"]
 		print(tweet_text)
-		print(predict.classifier.classify(predict.extract_features(tweet_text.split())))
+		prediction = predict.classifier.classify(predict.extract_features(tweet_text.split()))
+		global positive_tweets
+		global negative_tweets
+		if prediction == "positive":
+			positive_tweets += 1
+		elif prediction == "negative":
+			negative_tweets += 1
+		print(prediction)
+		labels = 'Positive', 'Negative'
+		data = [positive_tweets, negative_tweets]
+		colors = ['yellowgreen', 'gold']
+		explode = (0, 0)
+		plt.pie(data, explode=explode, labels=labels, colors=colors, autopct='%1.1f%%', shadow=True, startangle=90)
+		plt.draw()
 		return True
 
 	def on_error(self, status):
 		print(status)
 		return True
- 
+
+positive_tweets = 0
+negative_tweets = 0
+
+labels = 'Positive', 'Negative'
+data = [positive_tweets, negative_tweets]
+colors = ['yellowgreen', 'gold']
+explode = (0, 0)
+plt.pie(data, explode=explode, labels=labels, colors=colors, autopct='%1.1f%%', shadow=True, startangle=90)
+plt.ion()
+plt.show()
+
+data = [1, negative_tweets]
+plt.pie(data, explode=explode, labels=labels, colors=colors, autopct='%1.1f%%', shadow=True, startangle=90)
+plt.show()
+
 twitter_stream = Stream(auth, MyListener())
 twitter_stream.filter(track=['#AIRuben2016'])
