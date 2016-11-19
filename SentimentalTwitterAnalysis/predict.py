@@ -21,6 +21,6 @@ f.close()
 
 #print classifier.show_most_informative_features(32)
 
-tweet = "I hate this shit"
-tweet = tweet.lower()
-print classifier.classify(extract_features(tweet.split()))
+#tweet = "I hate this movie"
+#tweet = tweet.lower()
+#print classifier.classify(extract_features(tweet.split()))
