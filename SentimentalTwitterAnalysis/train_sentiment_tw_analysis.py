@@ -45,7 +45,8 @@ with open('cleaned_training_data.csv', 'r') as cleaned_data_file:
 tweets = []
 
 for (sentiment, tweet) in data:
-	tweet_filtered = [clean_word(word) for word in tweet.split() if ((len(word) >= 3) and (not '@' in word))]
+	tweet_filtered = [clean_word(word) for word in tweet.split() if ((len(word) >= 3) 
+		and (not '@' in word) and (not '#' in word))]
 	tweets.append((tweet_filtered, sentiment))
 
 word_features = get_word_features(get_words_in_tweets(tweets))

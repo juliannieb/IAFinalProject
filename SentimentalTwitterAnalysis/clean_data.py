@@ -4,8 +4,8 @@ import re
 max_positive = 5000
 max_negative = 5000
 
-max_positive_test = 5000
-max_negative_test = 5000
+max_positive_test = 1000
+max_negative_test = 1000
 
 count_positive = 0
 count_negative = 0
