@@ -32,9 +32,12 @@ class MyListener(StreamListener):
 		print(prediction)
 		labels = 'Positive', 'Negative'
 		data = [positive_tweets, negative_tweets]
-		colors = ['yellowgreen', 'gold']
+		colors = ['yellowgreen', 'red']
 		explode = (0, 0)
-		plt.pie(data, explode=explode, labels=labels, colors=colors, autopct='%1.1f%%', shadow=True, startangle=90)
+		plt.pie(data, explode=explode, colors=colors, autopct='%1.1f%%', shadow=True, startangle=90)
+		#plt.close()
+		plt.pause(1)
+		plt.clf()
 		plt.draw()
 		return True
 
@@ -47,15 +50,20 @@ negative_tweets = 0
 
 labels = 'Positive', 'Negative'
 data = [positive_tweets, negative_tweets]
-colors = ['yellowgreen', 'gold']
+colors = ['yellowgreen', 'red']
 explode = (0, 0)
-plt.pie(data, explode=explode, labels=labels, colors=colors, autopct='%1.1f%%', shadow=True, startangle=90)
+plt.pie(data, explode=explode, colors=colors, autopct='%1.1f%%', shadow=True, startangle=90)
 plt.ion()
 plt.show()
 
+"""
 data = [1, negative_tweets]
-plt.pie(data, explode=explode, labels=labels, colors=colors, autopct='%1.1f%%', shadow=True, startangle=90)
-plt.show()
+plt.pie(data, explode=explode, colors=colors, autopct='%1.1f%%', shadow=True, startangle=90)
+plt.pause(1)
+plt.cla()
+plt.draw()
+"""
+
 
 twitter_stream = Stream(auth, MyListener())
 twitter_stream.filter(track=['#AIRuben2016'])
