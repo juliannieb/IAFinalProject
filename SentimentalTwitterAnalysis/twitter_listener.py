@@ -56,14 +56,5 @@ plt.pie(data, explode=explode, colors=colors, autopct='%1.1f%%', shadow=True, st
 plt.ion()
 plt.show()
 
-"""
-data = [1, negative_tweets]
-plt.pie(data, explode=explode, colors=colors, autopct='%1.1f%%', shadow=True, startangle=90)
-plt.pause(1)
-plt.cla()
-plt.draw()
-"""
-
-
 twitter_stream = Stream(auth, MyListener())
 twitter_stream.filter(track=['#AIRuben2016'])

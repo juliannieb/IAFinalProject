@@ -23,7 +23,7 @@ def extract_features(tweet):
 
 def clean_word(word):
 	word = word.lower()
-	word = word.strip(".,#")
+	word = word.strip(".,\"")
 	return word
 
 data = []

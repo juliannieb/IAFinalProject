@@ -4,7 +4,7 @@ import nltk
 
 def clean_word(word):
 	word = word.lower()
-	word = word.strip(".,#")
+	word = word.strip(".,\"")
 	return word
 
 data = []
@@ -24,7 +24,8 @@ with open('test_data.csv', 'r') as cleaned_data_file:
 tweets = []
 
 for (sentiment, tweet) in data:
-	tweet_filtered = [clean_word(word) for word in tweet.split() if ((len(word) >= 3) and (not '@' in word))]
+	tweet_filtered = [clean_word(word) for word in tweet.split() if ((len(word) >= 3) 
+		and (not '@' in word) and (not '#' in word))]
 	tweets.append((tweet_filtered, sentiment))
 
 correct = 0

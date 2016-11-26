@@ -1,7 +1,12 @@
+cycler==0.10.0
+matplotlib==1.5.3
 nltk==3.2.1
 numpy==1.11.2
 oauthlib==2.0.0
 pbr==0.10.7
+pyparsing==2.1.10
+python-dateutil==2.6.0
+pytz==2016.7
 requests==2.12.1
 requests-oauthlib==0.7.0
 six==1.9.0
